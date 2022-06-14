@@ -42,7 +42,7 @@ const Users: React.FunctionComponent = (): React.ReactElement => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const res = await UsersService.delete(id);
-      toastMsg(ToastType.Success, 'Suave manito deletado jajajaja');
+      toastMsg(ToastType.Success, 'Deletado com sucesso!');
       fetchUsers();
     } catch (error) {
       toastMsg(ToastType.Error, (error as Error).message);

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useContext, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -18,8 +17,7 @@ import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthContext';
 import HttpClient from '../../services/httpClient';
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function Login() {
+function Login(): React.ReactElement {
   const theme = createTheme();
 
   const [cpf, setCpf] = useState<string>('');
@@ -36,7 +34,7 @@ function Login() {
       navigate('/List');
     }
 
-    function Copyright(props: any) {
+    function Copyright(props: any): React.ReactElement {
       return (
         <Typography variant="body2" color="text.secondary" align="left" {...props}>
           {'Copyright © '}
