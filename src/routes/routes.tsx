@@ -12,6 +12,7 @@ function Routes(): React.ReactElement {
       <Route path="/Home" element={<Home />} />
       <Route path="/List" element={<List />} />
       <Route path="/Actions" element={<Actions />} />
+      <Route path="/Actions/:id" element={<Actions />} />
     </ReactRoutes>
   );
 }

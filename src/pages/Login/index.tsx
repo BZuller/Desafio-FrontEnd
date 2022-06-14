@@ -58,8 +58,7 @@ function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage:
-              'url(https://a-static.mlcdn.com.br/1500x1500/quadro-decorativo-dragon-ball-goku-desenho-anime-com-moldura-g08-vital-quadros/vitalquadrosdobrasil/0090980707/43401908b32d3eeefaf6d040bf3c64a2.jpeg)',
+            backgroundImage: 'url()',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) => (t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900]),
             backgroundSize: 'cover',

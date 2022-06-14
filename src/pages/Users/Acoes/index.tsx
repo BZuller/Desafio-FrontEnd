@@ -70,7 +70,7 @@ const Create: React.FunctionComponent = (): React.ReactElement => {
       try {
         if (!isCleaningUp && id) {
           const res = await UsersService.user(id);
-          if (res) {
+          if (id) {
             const obj = {
               name: res.name,
               cpf: res.cpf,
