@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useMemo } from 'react';
 import { Table } from 'react-bootstrap';
@@ -12,6 +13,7 @@ export interface IColumn {
   key: string;
   label: string;
   hidden?: boolean;
+  isBool?: boolean;
 }
 
 export interface DataTableProps {
@@ -62,9 +64,15 @@ const DataTable = ({
     }
 
     const trs = data.map((row) => {
-      const tds = columns.map(({ isCenter, key, isDate }) => {
+      const tds = columns.map(({ isCenter, key, isDate, isBool }) => {
         const classCenter = isCenter ? 'text-center' : '';
-        const value = isDate ? formatDate((row as any)[key]) : (row as any)[key];
+        const value = isDate
+          ? formatDate((row as any)[key])
+          : isBool
+          ? row.admin === true
+            ? 'Administrador'
+            : 'Colaborador'
+          : (row as any)[key];
         return (
           <td key={`${Math.random() * data.length}`} className={classCenter}>
             {value}

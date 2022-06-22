@@ -4,15 +4,44 @@ import Home from '../pages/Home';
 import Login from '../pages/Login';
 import List from '../pages/Users/List';
 import Actions from '../pages/Users/Acoes';
+import PrivateRoute from './auth';
 
 function Routes(): React.ReactElement {
   return (
     <ReactRoutes>
       <Route path="/" element={<Login />} />
-      <Route path="/Home" element={<Home />} />
-      <Route path="/List" element={<List />} />
-      <Route path="/Actions" element={<Actions />} />
-      <Route path="/Actions/:id" element={<Actions />} />
+      <Route
+        path="/Home"
+        element={
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/List"
+        element={
+          <PrivateRoute>
+            <List />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/Actions"
+        element={
+          <PrivateRoute>
+            <Actions />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/Actions/:id"
+        element={
+          <PrivateRoute>
+            <Actions />
+          </PrivateRoute>
+        }
+      />
     </ReactRoutes>
   );
 }

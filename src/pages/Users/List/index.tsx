@@ -16,14 +16,12 @@ const columns = [
   { label: 'Nome', key: 'name' },
   { label: 'Data de Nascimento', key: 'birthdate', isDate: true },
   { label: 'CPF', key: 'cpf' },
-  { label: 'Permissão', key: 'permission' },
+  { label: 'Permissão', key: 'admin', isBool: true },
 ];
 
 const Users: React.FunctionComponent = (): React.ReactElement => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [users, setUsers] = useState<IUser[]>([]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const navigate = useNavigate();
 
   const { token, signOut } = useContext(AuthContext);
@@ -32,7 +30,6 @@ const Users: React.FunctionComponent = (): React.ReactElement => {
     try {
       const data = await UsersService.users();
       setUsers(data);
-      console.log(data);
     } catch (error) {
       toastMsg(ToastType.Error, (error as Error).message);
     }
@@ -40,7 +37,6 @@ const Users: React.FunctionComponent = (): React.ReactElement => {
 
   const deleteUser = async (id: string): Promise<void> => {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const res = await UsersService.delete(id);
       toastMsg(ToastType.Success, 'Deletado com sucesso!');
       fetchUsers();
@@ -73,6 +69,10 @@ const Users: React.FunctionComponent = (): React.ReactElement => {
         <Col md={12} className="mt-3 mb-2">
           <Button type="button" variant="primary" onClick={() => navigate('/Actions')} cy="test-create">
             Cadastrar funcionário
+          </Button>
+          <p />
+          <Button type="button" variant="danger" onClick={() => signOut()} cy="test-create">
+            Sair
           </Button>
         </Col>
         <Col md={12}>

@@ -8,7 +8,6 @@ interface ILoginResponse {
 
 class SessionService {
   static async login(cpf: string, password: string): Promise<ILoginResponse> {
-    console.log(cpf, password);
     const { data } = await HttpClient.api.post('/session', { cpf, password });
 
     return data;

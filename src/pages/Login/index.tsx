@@ -34,6 +34,7 @@ function Login(): React.ReactElement {
       navigate('/List');
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function Copyright(props: any): React.ReactElement {
       return (
         <Typography variant="body2" color="text.secondary" align="left" {...props}>
