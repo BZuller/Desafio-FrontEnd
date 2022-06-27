@@ -51,7 +51,6 @@ const Create: React.FunctionComponent = (): React.ReactElement => {
     try {
       setLoader(true);
       const { name, observations, cpf, password, birthdate, admin } = values;
-      console.log(admin);
       if (id) {
         await UsersService.update(id, admin, observations);
         toastMsg(ToastType.Success, 'Atualização realizada com sucesso!');
@@ -74,7 +73,6 @@ const Create: React.FunctionComponent = (): React.ReactElement => {
       try {
         if (!isCleaningUp && id) {
           const res = await UsersService.user(id);
-          console.log(id, res);
           if (id) {
             const obj = {
               name: res.name,
