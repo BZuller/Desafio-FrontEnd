@@ -12,7 +12,7 @@ import Button from '../../../components/Button';
 import { AuthContext } from '../../../contexts/AuthContext';
 
 const columns = [
-  { label: '#', key: 'id', isCenter: true },
+  { label: 'Observations', key: 'observations', isCenter: true },
   { label: 'Nome', key: 'name' },
   { label: 'Data de Nascimento', key: 'birthdate', isDate: true },
   { label: 'CPF', key: 'cpf' },
@@ -61,14 +61,14 @@ const Users: React.FunctionComponent = (): React.ReactElement => {
       <Row>
         <Col md={12}>
           <Text as="h1" size="2rem" weight={700}>
-            Funcionários
+            Usuários
           </Text>
         </Col>
       </Row>
       <Row>
         <Col md={12} className="mt-3 mb-2">
           <Button type="button" variant="primary" onClick={() => navigate('/Actions')} cy="test-create">
-            Cadastrar funcionário
+            Cadastrar usuário
           </Button>
           <p />
           <Button type="button" variant="danger" onClick={() => signOut()} cy="test-create">

@@ -15,6 +15,7 @@ interface IInput {
   placeholder?: string;
   type?: string;
   children?: React.ReactNode;
+  disabled?: boolean;
 }
 
 const Input = ({
@@ -29,6 +30,7 @@ const Input = ({
   placeholder,
   type,
   children,
+  disabled,
 }: IInput): React.ReactElement => (
   <label htmlFor={id} className="w-100">
     {label}
@@ -40,6 +42,7 @@ const Input = ({
       placeholder={placeholder}
       type={type || 'text'}
       className={classNames(`form-control ${isInvalid ? 'is-invalid' : ''} ${className}`)}
+      disabled={disabled}
     >
       {children}
     </FastField>

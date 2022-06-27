@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { AxiosError } from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { IAuthContext, IAuthProvider, IContextUser } from './types';
 import SessionService from '../../services/sessions.service';
@@ -11,7 +10,6 @@ export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 export const AuthProvider = ({ children }: IAuthProvider): React.ReactElement => {
   const [token, setToken] = useState<string>();
   const [user, setUser] = useState<IContextUser>({} as IContextUser);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const userToken = localStorage.getItem('userToken');
@@ -27,7 +25,6 @@ export const AuthProvider = ({ children }: IAuthProvider): React.ReactElement =>
     setUser({});
 
     localStorage.removeItem('userToken');
-    navigate('/');
   };
 
   const signIn = async (cpf: string, password: string): Promise<string | undefined> => {

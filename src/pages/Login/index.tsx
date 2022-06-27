@@ -49,7 +49,7 @@ function Login(): React.ReactElement {
   };
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: '100vh', width: '100vw' }}>
         <CssBaseline />
         <Grid
           item
@@ -57,7 +57,7 @@ function Login(): React.ReactElement {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url()',
+            backgroundImage: 'url(https://wallpaperaccess.com/full/3120137.jpg)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) => (t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900]),
             backgroundSize: 'cover',

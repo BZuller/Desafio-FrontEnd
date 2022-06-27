@@ -9,7 +9,6 @@ import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 import UsersService from '../../../services/Users.service';
 import toastMsg, { ToastType } from '../../../utils/toastMsg';
-import Admin from '../../../enums/admin';
 
 const createSchema = yup.object().shape({
   name: yup.string().min(2, 'Min. 2 caracteres').max(50, 'Máximo 50 caracteres').required('Campo obrigatório'),
@@ -20,13 +19,18 @@ const createSchema = yup.object().shape({
   admin: yup.boolean().required(),
 });
 
+const updateSchema = yup.object().shape({
+  observations: yup.string(),
+  admin: yup.number().required(),
+});
+
 interface ICreate {
   name: string;
   cpf: string;
   password: string;
   observations: string;
   birthdate: Date;
-  admin: boolean;
+  admin: number;
 }
 
 const defaultValue = {
@@ -34,7 +38,7 @@ const defaultValue = {
   observations: '',
   cpf: '',
   birthdate: new Date(''),
-  admin: false,
+  admin: 0,
 } as ICreate;
 
 const Create: React.FunctionComponent = (): React.ReactElement => {
@@ -47,7 +51,7 @@ const Create: React.FunctionComponent = (): React.ReactElement => {
     try {
       setLoader(true);
       const { name, observations, cpf, password, birthdate, admin } = values;
-
+      console.log(admin);
       if (id) {
         await UsersService.update(id, admin, observations);
         toastMsg(ToastType.Success, 'Atualização realizada com sucesso!');
@@ -70,13 +74,14 @@ const Create: React.FunctionComponent = (): React.ReactElement => {
       try {
         if (!isCleaningUp && id) {
           const res = await UsersService.user(id);
+          console.log(id, res);
           if (id) {
             const obj = {
               name: res.name,
               cpf: res.cpf,
               observations: res.observations,
               birthdate: res.birthdate,
-              admin: res.admin,
+              admin: res.admin ? 1 : 0,
             } as ICreate;
 
             setInitialValues(obj);
@@ -114,7 +119,7 @@ const Create: React.FunctionComponent = (): React.ReactElement => {
         <Col md={8}>
           <Formik
             initialValues={initialValues}
-            validationSchema={createSchema}
+            validationSchema={!id ? createSchema : updateSchema}
             enableReinitialize
             onSubmit={(values) => {
               handleSubmit(values);
@@ -123,43 +128,47 @@ const Create: React.FunctionComponent = (): React.ReactElement => {
             {({ errors, touched }) => (
               <Form autoComplete="off">
                 <Row>
-                  <Col md={12} className="mb-3">
-                    <Input
-                      cy="test-inputName"
-                      isInvalid={(errors.name && touched.name) || false}
-                      msg={errors.name}
-                      label="Nome do funcionário"
-                      id="name"
-                      name="name"
-                      as="input"
-                      placeholder="Insira um nome para o funcionário"
-                    />
-                  </Col>
-                  <Col md={12} className="mb-3">
-                    <Input
-                      cy="test-inputCpf"
-                      isInvalid={(errors.cpf && touched.cpf) || false}
-                      msg={errors.cpf}
-                      label="Cpf"
-                      id="cpf"
-                      name="cpf"
-                      as="input"
-                      placeholder="Insira o cpf do usuario"
-                    />
-                  </Col>
-                  <Col md={12} className="mb-3">
-                    <Input
-                      cy="test-inputPassword"
-                      isInvalid={(errors.password && touched.password) || false}
-                      msg={errors.password}
-                      label="Senha"
-                      id="password"
-                      name="password"
-                      as="input"
-                      type="password"
-                      placeholder="Insira uma senha para o usuario"
-                    />
-                  </Col>
+                  {!id && (
+                    <>
+                      <Col md={12} className="mb-3">
+                        <Input
+                          cy="test-inputName"
+                          isInvalid={(errors.name && touched.name) || false}
+                          msg={errors.name}
+                          label="Nome do funcionário"
+                          id="name"
+                          name="name"
+                          as="input"
+                          placeholder="Insira um nome para o funcionário"
+                        />
+                      </Col>
+                      <Col md={12} className="mb-3">
+                        <Input
+                          cy="test-inputCpf"
+                          isInvalid={(errors.cpf && touched.cpf) || false}
+                          msg={errors.cpf}
+                          label="Cpf"
+                          id="cpf"
+                          name="cpf"
+                          as="input"
+                          placeholder="Insira o cpf do usuario"
+                        />
+                      </Col>
+                      <Col md={12} className="mb-3">
+                        <Input
+                          cy="test-inputPassword"
+                          isInvalid={(errors.password && touched.password) || false}
+                          msg={errors.password}
+                          label="Senha"
+                          id="password"
+                          name="password"
+                          as="input"
+                          type="password"
+                          placeholder="Insira uma senha para o usuario"
+                        />
+                      </Col>
+                    </>
+                  )}
                   <Col md={12} className="mb-3">
                     <Input
                       cy="test-inputObservations"
@@ -172,32 +181,34 @@ const Create: React.FunctionComponent = (): React.ReactElement => {
                       placeholder="Insira uma observação para o usuário"
                     />
                   </Col>
-                  <Col md={12} className="mb-3">
-                    <Input
-                      cy="test-inputBirthdate"
-                      isInvalid={!!(errors.birthdate && touched.birthdate)}
-                      msg={errors.birthdate}
-                      label="Data de nascimento"
-                      id="birthdate"
-                      name="birthdate"
-                      as="input"
-                      type="date"
-                      placeholder="Data de nascimento"
-                    />
-                  </Col>
+                  {!id && (
+                    <Col md={12} className="mb-3">
+                      <Input
+                        cy="test-inputBirthdate"
+                        isInvalid={!!(errors.birthdate && touched.birthdate)}
+                        msg={errors.birthdate}
+                        label="Data de nascimento"
+                        id="birthdate"
+                        name="birthdate"
+                        as="input"
+                        type="date"
+                        placeholder="Data de nascimento"
+                      />
+                    </Col>
+                  )}
                   <Col md={12} className="mb-3">
                     <Input
                       cy="test-inputPermission"
                       isInvalid={(errors.admin && touched.admin) || false}
                       msg={errors.admin}
                       label="Permissão"
-                      id="permission"
-                      name="permission"
+                      id="admin"
+                      name="admin"
                       as="select"
                     >
                       <option>Selecione uma permissão</option>
-                      <option value={Admin.Yes}>Administrador</option>
-                      <option value={Admin.No}>Colaborador</option>
+                      <option value={1}>Administrador</option>
+                      <option value={0}>Colaborador</option>
                     </Input>
                   </Col>
                   <Col md={12} className="mt-3">

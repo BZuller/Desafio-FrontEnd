@@ -8,7 +8,7 @@ class UsersService {
   }
 
   static async user(id: string): Promise<IUser> {
-    const { data } = await HttpClient.api.get(`/users/${id}`);
+    const { data } = await HttpClient.api.get(`/user/${id}`);
     return data;
   }
 
@@ -17,16 +17,24 @@ class UsersService {
     cpf: string,
     password: string,
     birthdate: Date,
-    admin: boolean,
+    admin: number,
     observations?: string
   ): Promise<IUser> {
-    const { data } = await HttpClient.api.post('/user', { name, cpf, password, observations, birthdate, admin });
+    const { data } = await HttpClient.api.post('/user', {
+      name,
+      cpf,
+      password,
+      observations,
+      birthdate,
+      admin: !!admin,
+    });
     return data;
   }
 
-  static async update(id: string, admin: boolean, observations?: string): Promise<void> {
+  static async update(id: string, admin: number, observations?: string): Promise<void> {
     const obj = {
-      admin,
+      id,
+      admin: !!admin,
       observations,
     };
     const { data } = await HttpClient.api.put(`/user/${id}`, obj);

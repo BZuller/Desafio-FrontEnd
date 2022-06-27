@@ -1,6 +1,6 @@
 enum Admin {
-  Yes = 'yes',
-  No = 'no',
+  true = 1,
+  false = 0,
 }
 
 export default Admin;

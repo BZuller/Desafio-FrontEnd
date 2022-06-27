@@ -3,7 +3,7 @@ export interface IUser {
   name: string;
   cpf: string;
   password: string;
-  observations?: string;
+  observations: string;
   birthdate: Date;
   admin: boolean;
   createdAt: Date;
