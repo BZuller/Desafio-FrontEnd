@@ -10,6 +10,7 @@ import UsersService from '../../../services/Users.service';
 import toastMsg, { ToastType } from '../../../utils/toastMsg';
 import Button from '../../../components/Button';
 import { AuthContext } from '../../../contexts/AuthContext';
+import DeleteModal from '../../../components/DeleteModal';
 
 const columns = [
   { label: 'Observations', key: 'observations', isCenter: true },
@@ -24,7 +25,11 @@ const Users: React.FunctionComponent = (): React.ReactElement => {
 
   const navigate = useNavigate();
 
+  const [userId, setUserId] = useState('');
+
   const { token, signOut } = useContext(AuthContext);
+
+  const [open, setOpen] = React.useState(false);
 
   const fetchUsers = async (): Promise<void> => {
     try {
@@ -80,10 +85,14 @@ const Users: React.FunctionComponent = (): React.ReactElement => {
             data={users}
             columns={columns}
             hasActions
-            deleteAction={(id) => deleteUser(id)}
+            deleteAction={(id) => {
+              setOpen(true);
+              setUserId(id);
+            }}
             editAction={(id) => navigate(`/Actions/${id}`)}
           />
         </Col>
+        <DeleteModal open={open} setOpen={setOpen} deleteUser={deleteUser} id={userId} />
       </Row>
     </Section>
   );
