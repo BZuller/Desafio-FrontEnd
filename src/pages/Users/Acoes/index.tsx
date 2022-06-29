@@ -64,7 +64,7 @@ const Create: React.FunctionComponent = (): React.ReactElement => {
       navigate('/List');
     } catch (error) {
       setLoader(false);
-      toastMsg(ToastType.Error, (error as Error).message);
+      toastMsg(ToastType.Error, 'Não autorizado!');
     }
   };
   useEffect(() => {

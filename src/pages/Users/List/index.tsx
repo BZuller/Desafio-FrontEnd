@@ -36,7 +36,7 @@ const Users: React.FunctionComponent = (): React.ReactElement => {
       const data = await UsersService.users();
       setUsers(data);
     } catch (error) {
-      toastMsg(ToastType.Error, (error as Error).message);
+      toastMsg(ToastType.Error, 'Não autorizado');
     }
   };
 
@@ -46,7 +46,7 @@ const Users: React.FunctionComponent = (): React.ReactElement => {
       toastMsg(ToastType.Success, 'Deletado com sucesso!');
       fetchUsers();
     } catch (error) {
-      toastMsg(ToastType.Error, (error as Error).message);
+      toastMsg(ToastType.Error, 'Apenas admins podem deletar usuários');
     }
   };
 
