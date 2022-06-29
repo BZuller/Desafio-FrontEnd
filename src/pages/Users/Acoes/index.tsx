@@ -9,6 +9,7 @@ import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 import UsersService from '../../../services/Users.service';
 import toastMsg, { ToastType } from '../../../utils/toastMsg';
+import MaskCpf from '../../../components/CpfMask';
 
 const createSchema = yup.object().shape({
   name: yup.string().min(2, 'Min. 2 caracteres').max(50, 'Máximo 50 caracteres').required('Campo obrigatório'),
@@ -141,7 +142,7 @@ const Create: React.FunctionComponent = (): React.ReactElement => {
                         />
                       </Col>
                       <Col md={12} className="mb-3">
-                        <Input
+                        <MaskCpf
                           cy="test-inputCpf"
                           isInvalid={(errors.cpf && touched.cpf) || false}
                           msg={errors.cpf}

@@ -1,5 +1,5 @@
 export interface IAuthContext {
-  token?: string;
+  token?: string | null;
   user: IContextUser;
   signIn: (cpf: string, password: string) => Promise<string | undefined>;
   signOut: () => void;

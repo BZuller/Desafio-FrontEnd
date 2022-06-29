@@ -30,7 +30,7 @@ Mais informações: [site oficial](https://yarnpkg.com/).
 
 Clone esse repositório utilizando o comando abaixo no seu terminal:
 
-`$ git clone https://github.com/SoftdesignBrasil/quickstart-react.git`
+`$ git clone https://github.com/BZuller/Desafio-FrontEnd.git`
 
 Após o processo ser concluído no próprio terminal aberto localize a pasta que você acabou de clonar e dentro dela digite:
 

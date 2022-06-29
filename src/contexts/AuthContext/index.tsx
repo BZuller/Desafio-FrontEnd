@@ -8,7 +8,7 @@ import httpClient from '../../services/httpClient';
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider = ({ children }: IAuthProvider): React.ReactElement => {
-  const [token, setToken] = useState<string>();
+  const [token, setToken] = useState<string | null>(localStorage.getItem('userToken'));
   const [user, setUser] = useState<IContextUser>({} as IContextUser);
 
   useEffect(() => {
